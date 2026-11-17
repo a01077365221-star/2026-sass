@@ -1,0 +1,98 @@
+.sns {
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
+  font-size: 30px;
+  color: #333;
+}
+
+.sns li {
+  list-style: none;
+}
+
+.sns i {
+  transition: 0.3s;
+}
+
+.sns li:hover i {
+  color: red;
+  transition: 0.3s;
+  font-size: 34px;
+  transform: translateY(-5px);
+}
+
+#box01 {
+  background: #0f0;
+  border: 3px solid #f00;
+}
+
+#box02 {
+  background: #ff0;
+  border: 3px solid #00f;
+}
+
+.btn {
+  width: 200px;
+  height: 40px;
+  border: none;
+  text-align: center;
+}
+
+.btn1 {
+  color: #fff;
+  background: #5f0080;
+}
+
+.btn3 {
+  color: #fff;
+  background: #0f0;
+}
+
+.btn3 {
+  color: #000;
+  background: #ff0;
+}
+
+.list01 li {
+  border: 1px solid #ccc;
+}
+
+.list01 li:nth-child(2) {
+  border: 3px solid #f00;
+}
+
+.list01 li:nth-child(3) {
+  border: 4px double blue;
+}
+
+.list01 li:nth-child(4) {
+  border: 8px dotted lightgreen;
+}
+
+.list01 li:last-child {
+  border: 3px dashed orange;
+}
+
+.calender {
+  width: 600px;
+  border: 1px solid blue;
+  border-collapse: collapse;
+}
+
+.calender caption {
+  background: #ffff00;
+  padding: 10px 0px;
+  font-weight: bold;
+}
+
+.calender th, .calender td {
+  border: 1px solid blue;
+}
+
+.calender tr:nth-child(2n+1) {
+  background: rgb(238, 238, 194);
+}
+
+.calender tr:nth-child(2n) {
+  background: #e7dc09;
+}/*# sourceMappingURL=style1.css.map */

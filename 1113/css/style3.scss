@@ -1,0 +1,187 @@
+
+@charset "utf-8";
+
+// style.scss
+
+// 변수 선언
+$main_color: #4aa1c9;
+$base_color: #333;
+$price_color: red;
+$line_color: #ccc;
+
+
+// 1. 제목 영역 믹스인
+@mixin titleStyle($bg: $main_color, $color: #fff) {
+    background: $bg;
+    color: $color;
+    text-align: center;
+    padding: 13px 0;
+}
+
+
+// 2. 가로 정렬 믹스인
+@mixin flexStyle($align: center, $justify: space-between) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+
+// 3. 이미지 크기 믹스인
+@mixin imgSize($w, $h) {
+    width: $w;
+    height: $h;
+    object-fit: cover;
+    display: block;
+}
+
+
+// 4. 상품 설명 믹스인
+@mixin textStyle($size: 14px, $color: $base_color) {
+    font-size: $size;
+    color: $color;
+    line-height: 1.5;
+}
+
+
+
+// 5. 가격 믹스인
+@mixin priceStyle($color: $price_color) {
+    color: $color;
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+// 전체 초기화
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    color: $base_color;
+}
+
+
+// 제목 영역
+header {
+    @include titleStyle;
+
+    h2 {
+        font-size: 23px;
+    }
+}
+
+
+// 메인 영역
+main {
+    width: 1040px;
+    margin: 26px auto;
+    @include flexStyle(flex-start, space-between);
+    gap: 20px;
+}
+
+
+// 왼쪽 대표 상품
+.best_item {
+    width: 545px;
+
+    img {
+        @include imgSize(100%, 333px);
+    }
+
+    h3 {
+        @include textStyle(15px);
+        margin-top: 25px;
+    }
+
+    .price {
+        @include priceStyle;
+        margin-top: 35px;
+    }
+
+    .price span {
+        font-size: 12px;
+        font-weight: normal;
+    }
+}
+
+
+// 오른쪽 상품 목록
+.item_list {
+    width: 475px;
+}
+
+
+// 개별 상품
+.item {
+    @include flexStyle(flex-start, space-between);
+    gap: 19px;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid $line_color;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    img {
+        @include imgSize(215px, 132px);
+        flex-shrink: 0;
+    }
+}
+
+
+// 상품 설명
+.item_info {
+    flex: 1;
+
+    h3 {
+        @include textStyle(14px);
+    }
+
+    p {
+        @include textStyle(13px, #888);
+        margin-top: 12px;
+    }
+
+    .price {
+        @include priceStyle;
+        margin-top: 12px;
+    }
+
+    .price span {
+        font-size: 12px;
+        font-weight: normal;
+    }
+}
+
+
+// 모바일 반응형
+@media (max-width: 800px) {
+
+    main {
+        width: 95%;
+        flex-direction: column;
+    }
+
+    .best_item,
+    .item_list {
+        width: 100%;
+    }
+
+    .best_item img {
+        height: auto;
+        aspect-ratio: 545 / 333;
+    }
+
+    .item img {
+        width: 40%;
+        height: 120px;
+    }
+
+}

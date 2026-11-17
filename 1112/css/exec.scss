@@ -1,0 +1,108 @@
+@charset "utf-8";
+
+ul, li{list-style: none;}
+// 변수선언
+$box_center: 0px auto;
+$base_width:1200px;
+$box1_color: rgb(45, 45, 150);
+$box1_f_color: rgb(251, 251, 255);
+$box1_padding: 1px 6px;
+
+// exec.sass
+
+.promotion *{padding: 0px; margin: 0px;}
+
+.promotion{
+    width: $base_width;
+    margin: $box_center;
+    border: 1px solid #333;
+}
+
+.promotion ul{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+
+.promotion img{
+    width: 100%;
+}
+
+@mixin box1{
+width: 23%;
+margin: 1% 0px;
+}
+
+@mixin title_style{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+@mixin mini_style{
+    background: $box1_color;
+    color: $box1_f_color;
+    padding: $box1_padding;
+    font-size: 12px;
+}
+
+@mixin link_style{
+text-decoration: none;
+display: block;
+color: #979595;
+font-size: 10px;
+}
+
+@mixin hover {
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    &:hover::after {
+        opacity: 1;
+    }
+}
+
+.promotion ul li{
+    @include box1;
+}
+
+.mini{
+    @include mini_style;
+    position: absolute;
+}
+
+.c_title{
+    @include title_style;
+}
+
+.promotion > ul > li > a {
+    @include link_style;
+    position: relative;
+}
+
+.promotion > ul > li > a:first-child {
+    @include hover;
+}
+
+.mini {
+    @include mini_style;
+    position: absolute;
+    z-index: 1;
+}
+
+.more{
+    position: absolute;
+    right: 10px;
+    top: -20px;
+    text-decoration: underline;
+    font-weight: bold;
+    color: #333;
+
+}

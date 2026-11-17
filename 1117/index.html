@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASS / SCSS 학습 아카이브</title>
+    <!-- Pretendard 웹폰트 -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root {
+            --sass-pink: #cf649a;
+            --sass-pink-light: #fdf2f8;
+            --sass-pink-hover: #be4d86;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* 헤더 영역 */
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--sass-pink-light);
+            color: var(--sass-pink);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--text-sub);
+            font-size: 1rem;
+        }
+
+        /* 카드 그리드 레이아웃 */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        /* 기존 dl, dt, dd 태그를 활용한 카드 스타일링 */
+        dl {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        dl:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -5px rgba(207, 100, 154, 0.12);
+            border-color: rgba(207, 100, 154, 0.4);
+        }
+
+        dt {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--sass-pink-light);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .day-tag {
+            display: inline-block;
+            width: fit-content;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #fff;
+            background-color: var(--sass-pink);
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+
+        dd {
+            margin-bottom: 8px;
+        }
+
+        dd:last-child {
+            margin-bottom: 0;
+        }
+
+        dd a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: var(--text-sub);
+            background-color: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        dd a::after {
+            content: '→';
+            font-size: 1rem;
+            color: var(--sass-pink);
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: all 0.2s ease;
+        }
+
+        dd a:hover {
+            background-color: var(--sass-pink-light);
+            color: var(--sass-pink-hover);
+            font-weight: 600;
+            border-color: rgba(207, 100, 154, 0.2);
+            padding-left: 18px;
+        }
+
+        dd a:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* 실습 예제 강조 스타일 (선택 사항) */
+        dd a.practice {
+            background-color: #fff8fb;
+            border: 1px dashed rgba(207, 100, 154, 0.4);
+            color: #9d3b6d;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 640px) {
+            body {
+                padding: 24px 16px;
+            }
+            header h1 {
+                font-size: 1.75rem;
+            }
+            .curriculum-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <span class="badge">CSS PREPROCESSOR</span>
+            <h1>SASS / SCSS 학습 아카이브</h1>
+            <p>일차별 핵심 문법 정리 및 실전 UI 퍼블리싱 실습 모음</p>
+        </header>
+
+        <main class="curriculum-grid">
+            <dl>
+                <dt>
+                    <span class="day-tag">1일차 (11/11)</span>
+                    SASS 소개와 기본 문법
+                </dt>
+                <dd><a href="../1111/sass소개와 문법.html">sass소개와 문법</a></dd>
+            </dl>
+            
+            <dl>
+                <dt>
+                    <span class="day-tag">2일차 (11/12)</span>
+                    SASS 문서 만들기, @mixin & @include
+                </dt>
+                <dd><a href="../1112/01_sass 문서 만들기.html">01_sass 문서 만들기</a></dd>
+                <dd><a href="../1112/02_sass문법_믹싱기법_include기법.html">02_sass문법_믹싱기법_include기법</a></dd>
+                <dd><a href="../1112/03_파리바게트 프로모션 콘텐츠 구현하기.html" class="practice">03_파리바게트 프로모션 콘텐츠 구현하기</a></dd>
+            </dl>
+
+            <dl>
+                <dt>
+                    <span class="day-tag">3일차 (11/13)</span>
+                    변수의 개념과 활용, 믹스인 함수와 매개변수
+                </dt>
+                <dd><a href="../1113/01_sass문법_변수의 개념과 활용.html">01_sass문법_변수의 개념과 활용</a></dd>
+                <dd><a href="../1113/02_mixin함수응용.html">02_mixin함수응용</a></dd>
+                <dd><a href="../1113/list.html">list</a></dd>
+                <dd><a href="../1113/실습.html" class="practice">실습</a></dd>
+            </dl>
+
+            <dl>
+                <dt>
+                    <span class="day-tag">4일차 (11/16)</span>
+                    중첩규칙, 외부파일 불러오기, 내장함수
+                </dt>
+                <dd><a href="../1116/01_sass_중첩규칙.html">01_sass_중첩규칙</a></dd>
+                <dd><a href="../1116/02_scss_import.html">02_scss_import</a></dd>
+                <dd><a href="../1116/03_sass내장함수 문법.html">03_sass내장함수 문법</a></dd>
+                <dd><a href="../1116/실습응용_서브웨이 가맹점.html" class="practice">실습응용_서브웨이 가맹점</a></dd>
+            </dl>
+
+            <dl>
+                <dt>
+                    <span class="day-tag">5일차 (11/17)</span>
+                    SCSS 제어문 (조건문 · 반복문)
+                </dt>
+                <dd><a href="../1117/01_scss문법_내장함수(if문).html">01_scss문법_내장함수(if문)</a></dd>
+                <dd><a href="../1117/02_scss문법_내장함수(반복문).html">02_scss문법_내장함수(반복문)</a></dd>
+            </dl>
+        </main>
+
+        <footer>
+            <p>© 2026 SASS / SCSS Study Portfolio. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

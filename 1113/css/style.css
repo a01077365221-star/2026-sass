@@ -1,0 +1,37 @@
+@charset "UTF-8";
+body {
+  font-family: "맑은고딕", arial, sans-serif;
+  font-size: 18px;
+  color: #333;
+}
+
+header, main, footer {
+  padding: 20px 10px;
+  box-sizing: border-box;
+}
+
+header > h1 {
+  font-size: 26px;
+}
+
+main {
+  width: 1200px;
+  margin: 0px auto;
+  background: yellow;
+  border: 1px solid #333;
+}
+
+header, footer {
+  background: #333;
+  color: white;
+}
+
+address {
+  text-align: center;
+  font-style: normal;
+}
+
+section > h2 {
+  text-align: center;
+  font-size: 26px;
+}/*# sourceMappingURL=style.css.map */

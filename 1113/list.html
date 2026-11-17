@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 할 일은?</title>
+    <!-- Font Awesome 아이콘 사용을 위한 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            padding: 50px 20px;
+            color: #222;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 750px;
+        }
+
+        /* 헤더 영역 */
+        header h2 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 35px;
+        }
+
+        #addValue {
+            flex: 1;
+            height: 48px;
+            border: 2.5px solid #ff5500;
+            padding: 0 12px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #addValue::placeholder {
+            color: #999;
+        }
+
+        .add-btn {
+            width: 55px;
+            height: 48px;
+            background-color: #ff5500;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-btn:hover {
+            background-color: #e64d00;
+        }
+
+        /* 리스트 영역 */
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #ff5500;
+            padding: 22px 20px;
+            margin-top: -1px; /* 인접한 테두리 겹침 처리 */
+            background-color: #fff;
+        }
+
+        .todo-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+/* 원형 체크박스 */
+.circle-check {
+    width: 24px;
+    height: 24px;
+    border: 2.5px solid #ff5500;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* 동그라미 체크 상태 */
+ul li.checked .circle-check {
+    background-color: #ff5500;
+    border-color: #ff5500;
+}
+
+/* 체크 표시 */
+ul li.checked .circle-check::after {
+    content: '✓';
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* 글자 취소선 상태 */
+.todo-text.completed {
+    color: #cccccc;
+    text-decoration: line-through;
+    cursor: pointer;
+}
+
+        /* 개별 삭제 버튼 */
+        .delete-item-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #111;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .delete-item-btn:hover {
+            color: #ff5500;
+        }
+
+        /* 하단 모두 삭제 및 푸터 */
+        .bottom-controls {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        #del_btn {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 8px 14px;
+            font-size: 13px;
+            color: #555;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #del_btn:hover {
+            background-color: #e9e9e9;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        footer address {
+            font-style: normal;
+        }
+
+        /* 글자에 취소선이 생기면 동그라미도 회색 */
+ul li:has(.todo-text.completed) .circle-check {
+    background-color: #ccc;
+    border-color: #ccc;
+}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h2>검색어를 입력하세요.</h2>
+            <div class="input-group">
+                <!-- 입력을 위한 영역 -->
+                <input type="text" placeholder="검색어를 입력하세요." id="addValue">
+
+                <!-- 추가 버튼 -->
+                <button type="button" class="add-btn" id="btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 메인 영역 시작 -->
+        <main>
+            <section>
+                <ul id="result">
+                    <li>
+                        <div class="todo-content">
+                            <span class="circle-check"></span>
+                            <span class="todo-text">코딩 테스트</span>
+                        </div>
+                        <button type="button" class="delete-item-btn">삭제</button>
+                    </li>
+                    <li>
+                        <div class="todo-content">
+                            <span class="circle-check"></span>
+                            <span class="todo-text">테스트지 만들기</span>
+                        </div>
+                        <button type="button" class="delete-item-btn">삭제</button>
+                    </li>
+                    <li class="completed">
+                        <div class="todo-content">
+                            <span class="circle-check"></span>
+                            <span class="todo-text">테스트지 만들기</span>
+                        </div>
+                        <button type="button" class="delete-item-btn">삭제</button>
+                    </li>
+                </ul>
+
+                <p class="bottom-controls">
+                    <button type="button" id="del_btn">글 모두 삭제</button>
+                </p>
+            </section>
+        </main>
+
+        <!-- 푸터 영역 시작 -->
+        <footer>
+            <address>Copyright&copy;2026 오늘의 할일 allrights reserved.</address>
+        </footer>
+    </div>
+
+    <script>
+        const addValue = document.getElementById('addValue');
+        const addBtn = document.getElementById('btn');
+        const resultList = document.getElementById('result');
+        const delAllBtn = document.getElementById('del_btn');
+
+        // 할 일 추가 함수
+        function addTodo() {
+            const text = addValue.value.trim();
+            if (text === '') {
+                alert('할 일을 입력해주세요!');
+                addValue.focus();
+                return;
+            }
+
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="todo-content">
+                    <span class="circle-check"></span>
+                    <span class="todo-text">${text}</span>
+                </div>
+                <button type="button" class="delete-item-btn">삭제</button>
+            `;
+
+            resultList.appendChild(li);
+            addValue.value = '';
+            addValue.focus();
+        }
+
+        // 버튼 클릭으로 추가
+        addBtn.addEventListener('click', addTodo);
+
+        // 엔터키로 추가
+        addValue.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                addTodo();
+            }
+        });
+
+
+// 동그라미 체크 및 글자 취소선, 개별 삭제
+resultList.addEventListener('click', function (e) {
+
+    // 삭제 버튼 클릭 시
+    if (e.target.classList.contains('delete-item-btn')) {
+        e.target.closest('li').remove();
+        return;
+    }
+
+    // 동그라미 클릭 시 체크 표시
+    if (e.target.classList.contains('circle-check')) {
+        e.target.closest('li').classList.toggle('checked');
+    }
+
+    // 글자 클릭 시 취소선 표시
+    if (e.target.classList.contains('todo-text')) {
+        e.target.classList.toggle('completed');
+    }
+
+});
+
+       // 모두 삭제 버튼
+delAllBtn.addEventListener('click', function () {
+
+    // 삭제할 글이 없다면
+    if (resultList.children.length === 0) {
+        alert('삭제할 내용이 없습니다.');
+
+    } else {
+
+        // 삭제할 글이 있다면 확인창 띄우기
+        if (confirm('모든 할 일을 삭제하시겠습니까?')) {
+            resultList.innerHTML = '';
+        }
+
+    }
+
+});
+    </script>
+</body>
+</html>

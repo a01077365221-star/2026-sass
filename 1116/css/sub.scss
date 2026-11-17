@@ -1,0 +1,59 @@
+@charset 'utf-8';
+
+//1. 변수선언
+$max_width:1170px;
+$box_center:0 auto;
+$main_color01:#009223;
+$main_color02:#ffce32;
+$bg_color01:#333;
+$txt_color1:#888888; 
+
+
+*{margin: 0px; padding: 0px;}
+ul, li{list-style: none;}
+a{color: $bg_color01; text-decoration: none;}
+
+header{
+    border-top: 5px solid $main_color01;
+    height: 200px;
+    text-align:center;
+    > h1{
+        padding: 10px 0px;
+    }
+    > ul{
+        display: flex;
+    }
+
+}
+
+main{height:400px;}
+footer{
+    background: $bg_color01;
+> .f_lnb{
+    width: $max_width;
+    margin: $box_center;
+    display: flex;
+    justify-content: left;
+    >li{
+        line-height: 50px;
+        margin: 0px 10px;
+        >a{
+            // color: $txt_color1;
+            color: rgba(225, 225, 225, .5);
+
+
+        }
+        }
+}
+}
+
+// 함수로 글자색 %적용하기
+@function my-lighten($num){
+    @return 0.1*$num;
+
+}
+
+// f_lnb의 두번째 글자만 밝게 
+.f_lnb li:nth-child(2) a{
+    color: rgba(225, 225, 225, my_lighten(9));
+}

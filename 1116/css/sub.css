@@ -1,0 +1,50 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul, li {
+  list-style: none;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+header {
+  border-top: 5px solid #009223;
+  height: 200px;
+  text-align: center;
+}
+header > h1 {
+  padding: 10px 0px;
+}
+header > ul {
+  display: flex;
+}
+
+main {
+  height: 400px;
+}
+
+footer {
+  background: #333;
+}
+footer > .f_lnb {
+  width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: left;
+}
+footer > .f_lnb > li {
+  line-height: 50px;
+  margin: 0px 10px;
+}
+footer > .f_lnb > li > a {
+  color: rgba(225, 225, 225, 0.5);
+}
+
+.f_lnb li:nth-child(2) a {
+  color: rgba(225, 225, 225, 0.9);
+}/*# sourceMappingURL=sub.css.map */
